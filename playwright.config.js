@@ -17,9 +17,14 @@ const config = {
   use: {
 
     browserName : 'chromium',
-    headless : true,
+    headless : false,
+    viewport: { width: 1280, height: 720 },
     screenshot : 'on',
-    trace : 'on',//off,on
+    trace : 'on',//off,on,
+    launchOptions: {
+    slowMo: 50 // optional for better timing
+  }
+
     
     
     

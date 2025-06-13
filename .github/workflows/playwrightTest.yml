@@ -2,8 +2,8 @@ name: Scheduled Playwright Test
 
 on:
   schedule:
-    - cron: '0 3 * * *'  # Runs every day at 3 AM UTC (8:30 AM IST)
-  workflow_dispatch:      # Allows manual run
+    - cron: '0 3 * * *'  # Every day at 3 AM UTC (8:30 AM IST)
+  workflow_dispatch:
 
 jobs:
   test:
@@ -24,5 +24,13 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
-      - name: Run Playwright tests
-        run: npx playwright test
+      - name: Start Xvfb
+        run: |
+          export DISPLAY=':99'
+          Xvfb :99 -screen 0 1920x1080x24 > /dev/null 2>&1 &
+          echo "Xvfb started"
+
+      - name: Run Playwright tests in headed mode
+        env:
+          DISPLAY: ':99'
+        run: npx playwright test --headed

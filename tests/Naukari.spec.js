@@ -6,7 +6,12 @@ const fs = require('fs');
 
 test('Upload Resume', async ({ page }) => {
   await page.goto('https://www.naukri.com/');
-  await page.locator("//a[@title='Jobseeker Login']").click();
+  await page.waitForLoadState('networkidle');
+  const loginBtn = page.locator("//a[@id='login_Layer']");
+  await loginBtn.waitFor({ state: 'visible', timeout: 10000 });
+  await page.screenshot({ path: 'headless-debug.png', fullPage: true });
+
+  await loginBtn.click();
   await page.locator("//input[@placeholder='Enter your active Email ID / Username']").fill("anitrai741@gmail.com");
   await page.locator("//input[@placeholder='Enter your password']").fill("!Scorpion@123");
 
