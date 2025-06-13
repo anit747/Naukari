@@ -18,11 +18,11 @@ const config = {
 
     browserName : 'chromium',
     headless : false,
-    viewport: { width: 1280, height: 720 },
+    viewport: { width: 1280, height: 1024 },
     screenshot : 'on',
     trace : 'on',//off,on,
     launchOptions: {
-    slowMo: 50 // optional for better timing
+    slowMo: 100 // optional for better timing
   }
 
     
