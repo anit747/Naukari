@@ -2,7 +2,7 @@ name: Scheduled Playwright Test
 
 on:
   schedule:
-    - cron: '0 3 * * *'  # Every day at 3 AM UTC (8:30 AM IST)
+    - cron: '0 3 * * *'  # 8:30 AM IST daily
   workflow_dispatch:
 
 jobs:
@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v3
 
       - name: Setup Node.js
@@ -24,13 +24,5 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
-      - name: Start Xvfb
-        run: |
-          export DISPLAY=':99'
-          Xvfb :99 -screen 0 1920x1080x24 > /dev/null 2>&1 &
-          echo "Xvfb started"
-
       - name: Run Playwright tests in headed mode
-        env:
-          DISPLAY: ':99'
-        run: npx playwright test --headed
+        run: xvfb-run --auto-servernum --server-args='-screen 0 1280x1024x24' npx playwright test
