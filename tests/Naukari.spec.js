@@ -16,7 +16,10 @@ test('Upload Resume', async ({ page }) => {
   await page.locator("//input[@placeholder='Enter your password']").fill("!Scorpion@123");
 
   await page.locator("//button[@type='submit']").click();
+  await page.waitForLoadState('networkidle');
+  await page.waitForSelector("//div[@class='nI-gNb-drawer__icon']", { timeout: 15000 });
   await page.locator("//div[@class='nI-gNb-drawer__icon']").click();
+
   
   await page.getByText('View & Update Profile').click();
   await page.locator("//input[@value='Update resume']").click();
