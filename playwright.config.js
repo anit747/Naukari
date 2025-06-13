@@ -1,36 +1,28 @@
 // @ts-check
 const { devices } = require('@playwright/test');
 
+/** @type {import('@playwright/test').PlaywrightTestConfig} */
 const config = {
   testDir: './tests',
-  retries :0,
-  
-  /* Maximum time one test can run for. */
+  retries: 0,
+
   timeout: 30 * 1000,
   expect: {
-  
-    timeout: 5000
+    timeout: 5000,
   },
-  
+
   reporter: 'html',
-  /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
+
   use: {
-
-    browserName : 'chromium',
-    headless : false,
+    browserName: 'chromium',
+    headless: false, // headful mode
     viewport: { width: 1280, height: 1024 },
-    screenshot : 'on',
-    trace : 'on',//off,on,
+    screenshot: 'on',
+    trace: 'on',
     launchOptions: {
-    slowMo: 100 // optional for better timing
-  }
-
-    
-    
-    
+      slowMo: 100,
+    },
   },
-
-
 };
 
 module.exports = config;
